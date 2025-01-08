@@ -4,7 +4,7 @@ public class CalculadoraTaxaCorrente implements ICalculadorTaxas{
 
 
     @Override
-    public double calcularTaxa() {
-        return 0;
+    public double calcularTaxa(double saldo) {
+        return saldo * 0.02;
     }
 }

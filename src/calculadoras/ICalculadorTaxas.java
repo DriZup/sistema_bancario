@@ -2,5 +2,5 @@ package calculadoras;
 
 public interface ICalculadorTaxas {
 
-    public double calcularTaxa();
+    double calcularTaxa(double saldo);
 }
