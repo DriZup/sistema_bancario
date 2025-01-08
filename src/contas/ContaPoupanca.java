@@ -10,16 +10,24 @@ public class ContaPoupanca implements IConta {
 
     @Override
     public double calcularTaxa() {
-        return 0;
+        return saldo * 0.01;
     }
 
     @Override
-    public void realizarTransacoes() {
-
+    public void realizarTransacao(double valor) {
+        if (valor > 0) {
+            this.saldo -= valor;
+        } else {
+            this.saldo += Math.abs(valor);
+        }
     }
 
     @Override
     public String obterTipo() {
-        return "";
+        return "Conta Poupança";
+    }
+
+    public double getSaldo() {
+        return this.saldo;
     }
 }

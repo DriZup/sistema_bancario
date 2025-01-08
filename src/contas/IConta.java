@@ -2,6 +2,6 @@ package contas;
 
 public interface IConta {
     double calcularTaxa();
-    void realizarTransacoes();
     String obterTipo();
+    void realizarTransacao(double valor);
 }
