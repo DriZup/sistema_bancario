@@ -2,5 +2,5 @@ package notificacoes;
 
 public interface INotificador {
 
-    public void notificar(String mensagem);
+    void enviarNotificacao(String mensagem);
 }
