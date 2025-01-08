@@ -13,9 +13,7 @@ public class SistemaBancario {
         this.contas = new ArrayList<>();
     }
 
-    // Adiciona uma conta ao sistema
     public void adicionarConta(IConta conta) {
-        // Verifica se a conta já não foi adicionada ao sistema
         if (!contas.contains(conta)) {
             this.contas.add(conta);
             System.out.println("Conta adicionada: " + conta.obterTipo());
@@ -24,7 +22,6 @@ public class SistemaBancario {
         }
     }
 
-    // Realiza uma transação em uma conta específica
     public void realizarTransacao(IConta conta, double valor) {
         if (contas.contains(conta)) {
             conta.realizarTransacao(valor);
@@ -34,7 +31,6 @@ public class SistemaBancario {
         }
     }
 
-    // Calcula a taxa de uma conta específica
     public void calcularTaxa(IConta conta) {
         if (contas.contains(conta)) {
             double taxa = conta.calcularTaxa();
