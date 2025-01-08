@@ -12,4 +12,9 @@ public class NotificadorSMS implements INotificador {
     public void notificar(String mensagem) {
 
     }
+
+    @Override
+    public void enviarNotificacao(String mensagem) {
+        
+    }
 }

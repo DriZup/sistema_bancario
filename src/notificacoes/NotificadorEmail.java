@@ -8,4 +8,9 @@ public class NotificadorEmail implements INotificador {
         System.out.println();
 
     }
+
+    @Override
+    public void enviarNotificacao(String mensagem) {
+
+    }
 }
