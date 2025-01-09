@@ -1,7 +1,9 @@
 package contas;
 
+import calculadoras.CalculadoraTaxaPoupanca;
 import calculadoras.ICalculadorTaxas;
 import notificacoes.INotificador;
+import notificacoes.NotificadorSMS;
 import utils.ValidadorCPF;
 
 public class ContaPoupanca implements IConta {
@@ -12,12 +14,6 @@ public class ContaPoupanca implements IConta {
     private String cpf;
 
     public ContaPoupanca(double saldo, ICalculadorTaxas calculadora, INotificador notificador, String cpf) {
-        if (calculadora == null) {
-            throw new IllegalArgumentException("Calculadora de taxas não pode ser nula.");
-        }
-        if (notificador == null) {
-            throw new IllegalArgumentException("Notificador não pode ser nulo.");
-        }
         if (!ValidadorCPF.validar(cpf)) {
             throw new IllegalArgumentException("CPF inválido.");
         }
@@ -27,31 +23,34 @@ public class ContaPoupanca implements IConta {
         this.cpf = cpf;
     }
 
+
     @Override
     public double calcularTaxa() {
+        if (calculadora == null) {
+            throw new IllegalStateException("Calculadora de taxas não foi inicializada.");
+        }
         return calculadora.calcularTaxa(this.saldo);
     }
 
     @Override
-    public void realizarTransacao(double valor) {
-        if (valor > this.saldo) {
-            throw new IllegalArgumentException("Saldo insuficiente para realizar a transação.");
-        }
-        this.saldo -= valor;
-        System.out.println("Transação realizada. Saldo da " + obterTipo() + ": " + this.saldo);
-        notificador.enviarNotificacao("Transação realizada: -" + valor + " na Conta Poupança. Novo saldo: " + this.saldo);
-    }
-
-    @Override
     public String obterTipo() {
-        return "Conta Poupança";
+        return "Conta Corrente";
     }
 
     @Override
+    public void realizarTransacao(double valor) {
+        this.saldo += valor;
+        System.out.println("Transação realizada. Saldo da " + obterTipo() + ": " + this.saldo);
+        if (notificador != null) {
+            notificador.enviarNotificacao("Transação realizada na " + obterTipo() + ". Novo saldo: " + this.saldo);
+        }
+    }
+
     public double getSaldo() {
         return saldo;
     }
 
+    @Override
     public String getCpf() {
         return cpf;
     }
