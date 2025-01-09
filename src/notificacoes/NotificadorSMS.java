@@ -2,19 +2,10 @@ package notificacoes;
 
 public class NotificadorSMS implements INotificador {
 
-    private String telefone;
-
-    public NotificadorSMS(String telefone) {
-        this.telefone = telefone;
-    }
-
-    @Override
-    public void notificar(String mensagem) {
-
-    }
 
     @Override
     public void enviarNotificacao(String mensagem) {
-        
+        System.out.println("Enviando e-mail: " + mensagem);
+
     }
 }
