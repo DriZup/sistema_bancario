@@ -2,6 +2,7 @@ package contas;
 
 import calculadoras.ICalculadorTaxas;
 import notificacoes.INotificador;
+import utils.ValidadorCPF;
 
 public class ContaCorrente implements IConta {
     private double saldo;
@@ -9,12 +10,15 @@ public class ContaCorrente implements IConta {
     private INotificador notificador;
     private String cpf;
 
-    public ContaCorrente(double saldo, ICalculadorTaxas calculadora, INotificador notificador) {
+    public ContaCorrente(double saldo, ICalculadorTaxas calculadora, INotificador notificador, String cpf) {
+        if (!ValidadorCPF.validar(cpf)) {
+            throw new IllegalArgumentException("CPF inválido.");
+        }
         this.saldo = saldo;
         this.calculadora = calculadora;
         this.notificador = notificador;
+        this.cpf = cpf;
     }
-
 
     @Override
     public double calcularTaxa() {
@@ -41,5 +45,9 @@ public class ContaCorrente implements IConta {
 
     public double getSaldo() {
         return saldo;
+    }
+
+    public String getCpf() {
+        return cpf;
     }
 }
