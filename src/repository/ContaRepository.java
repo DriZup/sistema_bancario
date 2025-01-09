@@ -5,24 +5,22 @@ import contas.IConta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContaRepositoryImpl implements IContaRepository {
+public class ContaRepository implements IContaRepository{
 
     private List<IConta> contas = new ArrayList<>();
 
     @Override
-    public void save(IConta conta) {
+    public void salvarConta(IConta conta) {
         contas.add(conta);
         System.out.println("Conta salva: " + conta.obterTipo());
     }
 
     @Override
-    public void delete(IConta conta) {
-
-    }
-
-    @Override
-    public void update(IConta conta) {
-
+    public IConta buscarContaPorCpf(String cpf) {
+        return contas.stream()
+                .filter(conta -> conta.getCpf().equals(cpf))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
@@ -30,3 +28,4 @@ public class ContaRepositoryImpl implements IContaRepository {
         return contas;
     }
 }
+

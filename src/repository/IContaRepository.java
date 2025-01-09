@@ -5,15 +5,11 @@ import contas.IConta;
 import java.util.List;
 
 public interface IContaRepository {
-    void save(IConta conta);
 
-    void delete(IConta conta);
 
-    void update(IConta conta);
+    void salvarConta(IConta conta);
+
+    IConta buscarContaPorCpf(String cpf);
 
     List<IConta> listarContas();
-
-    void realizarTransacao(IConta conta, double valor);
-
-    void calcularTaxa(IConta conta);
 }
