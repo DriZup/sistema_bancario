@@ -14,11 +14,7 @@ public class ContaCorrente implements IConta {
         this.notificador = notificador;
     }
 
-    public ContaCorrente(double saldo) {
-        this.saldo = saldo;
-        this.calculadora = null;
-        this.notificador = null;
-    }
+
 
     @Override
     public double calcularTaxa() {
