@@ -39,4 +39,19 @@ public class SistemaBancario {
             System.out.println("Conta não encontrada no sistema.");
         }
     }
+
+    public void listarContas() {
+        for (int i = 0; i < contas.size(); i++) {
+            System.out.println(contas.get(i).obterTipo() + " - Saldo? " + contas.get(i).getSaldo());
+        }
+    }
+
+    public IConta getConta(int indice) {
+        if (indice >= 0 && indice < contas.size()) {
+            return contas.get(indice);
+        } else {
+            System.out.println("Índice inválido.");
+            return null;
+        }
+    }
 }
