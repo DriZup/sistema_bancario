@@ -9,12 +9,10 @@ public class ValidadorCPF {
             return false;
         }
 
-        // Verifica o primeiro dígito verificador
         if (!verificarDigito(cpf, 9, 10)) {
             return false;
         }
 
-        // Verifica o segundo dígito verificador
         if (!verificarDigito(cpf, 10, 11)) {
             return false;
         }
