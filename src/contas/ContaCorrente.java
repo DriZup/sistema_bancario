@@ -15,7 +15,6 @@ public class ContaCorrente implements IConta {
     }
 
 
-
     @Override
     public double calcularTaxa() {
         if (calculadora == null) {
