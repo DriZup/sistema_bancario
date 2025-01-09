@@ -10,4 +10,6 @@ public interface IConta {
     double getSaldo();
 
     String getCpf();
+
+    String getNome();
 }

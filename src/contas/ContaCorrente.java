@@ -9,8 +9,9 @@ public class ContaCorrente implements IConta {
     private ICalculadorTaxas calculadora;
     private INotificador notificador;
     private String cpf;
+    private String nome;
 
-    public ContaCorrente(double saldo, ICalculadorTaxas calculadora, INotificador notificador, String cpf) {
+    public ContaCorrente(double saldo, ICalculadorTaxas calculadora, INotificador notificador, String cpf, String nome) {
         if (!ValidadorCPF.validar(cpf)) {
             throw new IllegalArgumentException("CPF inválido.");
         }
@@ -18,6 +19,7 @@ public class ContaCorrente implements IConta {
         this.calculadora = calculadora;
         this.notificador = notificador;
         this.cpf = cpf;
+        this.nome = nome;
     }
 
     @Override
@@ -49,5 +51,9 @@ public class ContaCorrente implements IConta {
 
     public String getCpf() {
         return cpf;
+    }
+    @Override
+    public String getNome() {
+        return nome;
     }
 }

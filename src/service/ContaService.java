@@ -39,7 +39,7 @@ public class ContaService  {
 
     public void listarContas() {
         contaRepository.listarContas().forEach(conta -> {
-            System.out.println("Conta: " + conta.obterTipo() + ", CPF: " + conta.getCpf() + ", Saldo: " + conta.getSaldo());
+            System.out.println("Conta: " + conta.obterTipo() + ", Nome: " + conta.getNome() + ", CPF: " + conta.getCpf() + ", Saldo: " + conta.getSaldo());
         });
     }
 }
