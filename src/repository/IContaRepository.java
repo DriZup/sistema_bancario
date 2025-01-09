@@ -12,4 +12,8 @@ public interface IContaRepository {
     void update(IConta conta);
 
     List<IConta> listarContas();
+
+    void realizarTransacao(IConta conta, double valor);
+
+    void calcularTaxa(IConta conta);
 }
