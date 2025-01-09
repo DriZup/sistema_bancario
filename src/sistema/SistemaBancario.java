@@ -14,6 +14,10 @@ public class SistemaBancario {
     }
 
     public void adicionarConta(IConta conta) {
+        if (conta == null) {
+            System.out.println("Conta inválida. Não é possível adicionar.");
+            return;
+        }
         if (!contas.contains(conta)) {
             this.contas.add(conta);
             System.out.println("Conta adicionada: " + conta.obterTipo());
@@ -23,27 +27,29 @@ public class SistemaBancario {
     }
 
     public void realizarTransacao(IConta conta, double valor) {
-        if (contas.contains(conta)) {
-            conta.realizarTransacao(valor);
-            System.out.println("Transação realizada. Saldo da " + conta.obterTipo() + ": " + conta.getSaldo());
-        } else {
-            System.out.println("Conta não encontrada no sistema.");
+        IConta contaEncontrada = buscarConta(conta);
+        if (contaEncontrada != null) {
+            contaEncontrada.realizarTransacao(valor);
+            System.out.println("Transação realizada. Saldo da " + contaEncontrada.obterTipo() + ": " + contaEncontrada.getSaldo());
         }
     }
 
     public void calcularTaxa(IConta conta) {
-        if (contas.contains(conta)) {
-            double taxa = conta.calcularTaxa();
-            System.out.println("Taxa da " + conta.obterTipo() + ": " + taxa);
-        } else {
-            System.out.println("Conta não encontrada no sistema.");
+        IConta contaEncontrada = buscarConta(conta);
+        if (contaEncontrada != null) {
+            double taxa = contaEncontrada.calcularTaxa();
+            System.out.println("Taxa da " + contaEncontrada.obterTipo() + ": " + taxa);
         }
     }
 
     public void listarContas() {
-        for (int i = 0; i < contas.size(); i++) {
-            System.out.println(contas.get(i).obterTipo() + " - Saldo? " + contas.get(i).getSaldo());
+        if (contas.isEmpty()) {
+            System.out.println("Nenhuma conta cadastrada no sistema.");
+            return;
         }
+        contas.forEach(conta ->
+                System.out.println(conta.obterTipo() + " - Saldo: " + conta.getSaldo())
+        );
     }
 
     public IConta getConta(int indice) {
@@ -51,6 +57,19 @@ public class SistemaBancario {
             return contas.get(indice);
         } else {
             System.out.println("Índice inválido.");
+            return null;
+        }
+    }
+
+    private IConta buscarConta(IConta conta) {
+        if (conta == null) {
+            System.out.println("Conta inválida.");
+            return null;
+        }
+        if (contas.contains(conta)) {
+            return conta;
+        } else {
+            System.out.println("Conta não encontrada no sistema.");
             return null;
         }
     }
