@@ -3,29 +3,43 @@ package service;
 import contas.IConta;
 import repository.IContaRepository;
 
-import java.util.List;
 
-public class ContaService {
 
-    private IContaRepository contaRepository;
+public class ContaService  {
+
+    private final IContaRepository contaRepository;
 
     public ContaService(IContaRepository contaRepository) {
         this.contaRepository = contaRepository;
     }
 
-    public void criarConta(IConta conta) throws Exception {
-         contaRepository.save(conta);
-    }
-    public void realizarTransacao(IConta conta, double valor) throws Exception {
-        contaRepository.realizarTransacao(conta, valor);
-    }
-
-    public List<IConta> listarContas() {
-        return contaRepository.listarContas();
-    }
-    public void calcularTaxa(IConta conta) throws Exception {
-        contaRepository.calcularTaxa(conta);
-        System.out.println("Taxa da " + conta.obterTipo() + ": " + conta.calcularTaxa());
+    public void criarConta(IConta conta) {
+        if (contaRepository.buscarContaPorCpf(conta.getCpf()) != null) {
+            throw new IllegalArgumentException("Já existe uma conta com este CPF.");
+        }
+        contaRepository.salvarConta(conta);
     }
 
+    public void realizarTransacao(String cpf, double valor) {
+        IConta conta = contaRepository.buscarContaPorCpf(cpf);
+        if (conta == null) {
+            throw new IllegalArgumentException("Conta não encontrada para o CPF: " + cpf);
+        }
+        conta.realizarTransacao(valor);
+    }
+
+    public void calcularTaxa(String cpf) {
+        IConta conta = contaRepository.buscarContaPorCpf(cpf);
+        if (conta == null) {
+            throw new IllegalArgumentException("Conta não encontrada para o CPF: " + cpf);
+        }
+        double taxa = conta.calcularTaxa();
+        System.out.println("Taxa da " + conta.obterTipo() + ": " + taxa);
+    }
+
+    public void listarContas() {
+        contaRepository.listarContas().forEach(conta -> {
+            System.out.println("Conta: " + conta.obterTipo() + ", CPF: " + conta.getCpf() + ", Saldo: " + conta.getSaldo());
+        });
+    }
 }
