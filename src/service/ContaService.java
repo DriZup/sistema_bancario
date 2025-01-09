@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ContaService {
 
-    private IContaRepository contaRepository
+    private IContaRepository contaRepository;
 
     public ContaService(IContaRepository contaRepository) {
         this.contaRepository = contaRepository;

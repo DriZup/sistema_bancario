@@ -7,6 +7,7 @@ public class ContaCorrente implements IConta {
     private double saldo;
     private ICalculadorTaxas calculadora;
     private INotificador notificador;
+    private String cpf;
 
     public ContaCorrente(double saldo, ICalculadorTaxas calculadora, INotificador notificador) {
         this.saldo = saldo;
