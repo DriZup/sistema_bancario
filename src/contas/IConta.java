@@ -8,4 +8,6 @@ public interface IConta {
     String obterTipo();
 
     double getSaldo();
+
+    String getCpf();
 }
